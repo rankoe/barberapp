@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barber Studio App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom styles if needed -->
+    <link rel="stylesheet" href="styles.css">
+<!-- Libraries to resemble original app -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+</head>
+<body class="bg-gray-50 font-sans text-gray-900">
+    <!-- Navigation Bar -->
+    <nav id="main-nav">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="text-2xl font-bold text-blue-600 cursor-pointer" id="main-title">Barber Studio</div>
+            <span id="user-welcome" class="ml-4 text-gray-700"></span>
+            <ul class="hidden md:flex space-x-6">
+                <li><a href="#home" class="nav-link text-gray-700 hover:text-blue-600 transition">Home</a></li>
+                <li><a href="#services" class="nav-link text-gray-700 hover:text-blue-600 transition">Services</a></li>
+                <li><a href="#gallery" class="nav-link text-gray-700 hover:text-blue-600 transition">Gallery</a></li>
+                <li><a href="#booking" class="nav-link text-gray-700 hover:text-blue-600 transition">Booking</a></li>
+                <li><a href="#dashboard" class="nav-link text-gray-700 hover:text-blue-600 transition">Dashboard</a></li>
+                <li><a href="#contact" class="nav-link text-gray-700 hover:text-blue-600 transition">Contact</a></li>
+                <li><a href="#admin" class="nav-link text-gray-700 hover:text-blue-600 transition">Admin</a></li>
+            </ul>
+            <div class="flex items-center">
+                <select id="lang-toggle" class="bg-gray-200 px-2 py-1 rounded mr-2">
+                    <option value="en">🇺🇸 English</option>
+                    <option value="es">🇪🇸 Español</option>
+                </select>
+                <li id="auth-nav"><a href="#login" class="nav-link text-gray-700 hover:text-blue-600 transition">Login</a></li>
+                <button id="logout-btn" class="bg-gray-200 px-2 py-1 rounded hidden ml-2">Logout</button>
+            </div>
+            <!-- Mobile menu button -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-700 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-gray-100">
+            <a href="#home" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Home</a>
+            <a href="#services" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Services</a>
+            <a href="#gallery" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Gallery</a>
+            <a href="#booking" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Booking</a>
+            <a href="#dashboard" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Dashboard</a>
+            <a href="#contact" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Contact</a>
+            <a href="#admin" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Admin</a>
+            <a href="#login" id="mobile-login" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Login</a>
+            <button id="mobile-logout" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hidden">Logout</button>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="container mx-auto px-4 py-8 min-h-screen">
+        <!-- Home Section -->
+        <section id="home" class="section">
+            <div class="text-center">
+                <h2 class="text-4xl font-bold mb-4">Welcome to Barber Studio</h2>
+                <p class="text-xl text-gray-600 mb-8">Professional grooming services at your fingertips. Book your appointment now!</p>
+                <div class="grid md:grid-cols-5 gap-4 mt-8">
+                    <button id="book-appointment-btn" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700">Book Appointment</button>
+                    <button id="my-appointments-btn" class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700">My Appointments</button>
+                    <button id="profile-btn" class="bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700">Profile</button>
+                    <button id="company-btn" class="bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-700">Company</button>
+                    <button id="notifications-btn" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700">Notifications</button>
+                </div>
+            </div>
+            <!-- Hero image or features -->
+            <div class="grid md:grid-cols-3 gap-8 mt-12">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="text-4xl mb-4">✂️</div>
+                    <h3 class="text-xl font-semibold mb-2">Expert Barbers</h3>
+                    <p class="text-gray-600">Skilled professionals ready to give you the perfect cut.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="text-4xl mb-4">🕒</div>
+                    <h3 class="text-xl font-semibold mb-2">Easy Booking</h3>
+                    <p class="text-gray-600">Schedule appointments online with just a few clicks.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="text-4xl mb-4">💺</div>
+                    <h3 class="text-xl font-semibold mb-2">Comfortable Environment</h3>
+                    <p class="text-gray-600">Relax in our modern studio with friendly service.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="section hidden">
+            <h2 class="text-4xl font-bold text-center mb-8">Our Services</h2>
+            <div id="services-list" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Services will be populated by JS -->
+            </div>
+        </section>
+
+        <!-- Booking Section -->
+        <section id="booking" class="section hidden">
+            <h2 class="text-4xl font-bold text-center mb-8">Book Your Appointment</h2>
+            <div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
+                <form id="booking-form">
+                    <div class="mb-4">
+                        <label for="service-select" class="block text-sm font-medium text-gray-700 mb-2">Select Service</label>
+                        <select id="service-select" required class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                            <option value="">Choose a service</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="barber-select" class="block text-sm font-medium text-gray-700 mb-2">Select Barber</label>
+                        <select id="barber-select" required class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                            <option value="">Choose a barber</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="date-input" class="block text-sm font-medium text-gray-700 mb-2">Preferred Date</label>
+                        <input type="text" id="date-input" required class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                    </div>
+                    <div class="mb-4">
+                        <label for="time-input" class="block text-sm font-medium text-gray-700 mb-2">Preferred Time</label>
+                        <input type="time" id="time-input" required class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">Book Appointment</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section hidden">
+            <h2 class="text-4xl font-bold text-center mb-8">Your Dashboard</h2>
+            <div id="appointments-list" class="space-y-4">
+                <!-- Appointments will be populated by JS -->
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="section hidden">
+            <h2 class="text-4xl font-bold text-center mb-8">Our Gallery</h2>
+            <div class="grid md:grid-cols-3 gap-4">
+                <a href="https://via.placeholder.com/400x300?text=Haircut+1" data-fancybox="gallery" class="block">
+                    <img src="https://via.placeholder.com/400x300?text=Haircut+1" alt="Haircut 1" class="w-full h-64 object-cover rounded-lg shadow-md">
+                </a>
+                <a href="https://via.placeholder.com/400x300?text=Haircut+2" data-fancybox="gallery" class="block">
+                    <img src="https://via.placeholder.com/400x300?text=Haircut+2" alt="Haircut 2" class="w-full h-64 object-cover rounded-lg shadow-md">
+                </a>
+                <a href="https://via.placeholder.com/400x300?text=Haircut+3" data-fancybox="gallery" class="block">
+                    <img src="https://via.placeholder.com/400x300?text=Haircut+3" alt="Haircut 3" class="w-full h-64 object-cover rounded-lg shadow-md">
+                </a>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section hidden">
+            <h2 class="text-4xl font-bold text-center mb-8">Contact Us</h2>
+            <div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Address</h3>
+                        <p class="text-gray-600">123 Main Street, City, State 12345</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Phone</h3>
+                        <p class="text-gray-600">(123) 456-7890</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Email</h3>
+                        <p class="text-gray-600">info@barberstudio.com</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Hours</h3>
+                        <p class="text-gray-600">Mon-Fri: 9am-7pm<br>Sat: 8am-5pm<br>Sun: Closed</p>
+                    </div>
+                </div>
+            </div>
+            <div id="services-list" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+                <!-- Services will be populated by JS -->
+            </div>
+        </section>
+
+        <!-- Admin Section -->
+        <section id="admin" class="section hidden">
+            <h2 class="text-4xl font-bold text-center mb-8">Admin Panel</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white p-8 rounded-lg shadow-md mb-8">
+                    <h3 class="text-2xl font-semibold mb-4">Manage Services</h3>
+                    <button id="manage-services-btn" class="bg-blue-600 text-white px-4 py-2 rounded mr-4">Manage Services</button>
+                    <button id="manage-appointments-btn" class="bg-green-600 text-white px-4 py-2 rounded">Manage Appointments</button>
+                </div>
+                <div id="admin-content">
+                    <!-- Content will be populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Login Section -->
+        <section id="login" class="section hidden">
+            <h2 id="login-title" class="text-4xl font-bold text-center mb-8">Login</h2>
+            <div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
+                <form id="login-form">
+                    <div class="mb-4">
+                        <label for="user" class="block text-sm font-medium text-gray-700">User</label>
+                        <input type="text" id="user" placeholder="User" required class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                    </div>
+                    <div class="mb-4">
+                        <label for="pass" class="block text-sm font-medium text-gray-700">Password</label>
+                        <input type="password" id="pass" placeholder="Password" required class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">Login</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 Barber Studio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+/* Custom styles for Barber Studio App
+ * Add any custom CSS here if needed beyond Tailwind
+ * TODO: Add custom animations for transitions
+ * TODO: Implement dark mode toggle
+ * TODO: Add responsive breakpoints if needed
+ */
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Example custom style - can be removed if not needed */
+.section {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
