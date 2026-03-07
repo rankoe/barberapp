@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios - Barber Studio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Configuración de Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'montserrat': ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        'barber-primary': '#1a1a1a',
+                        'barber-secondary': '#8b7355',
+                        'barber-accent': '#d4af37',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-montserrat bg-gray-50">
+    
+    <!-- Navegación -->
+    <nav class="bg-barber-primary text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <svg class="w-8 h-8 text-barber-accent" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                    </svg>
+                    <a href="index.html" class="text-xl font-bold">Barber Studio</a>
+                </div>
+                
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="hover:text-barber-accent transition-colors">Inicio</a>
+                    <a href="servicios.html" class="hover:text-barber-accent transition-colors">Servicios</a>
+                    <a href="reservar.html" class="hover:text-barber-accent transition-colors">Reservar</a>
+                    <a href="galeria.html" class="hover:text-barber-accent transition-colors">Galería</a>
+                    <a href="contacto.html" class="hover:text-barber-accent transition-colors">Contacto</a>
+                </div>
+                
+                <!-- Usuario y Login -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="perfil.html" class="hover:text-barber-accent transition-colors flex items-center space-x-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                        <span>Mi Perfil</span>
+                    </a>
+                    <a href="login.html" class="bg-barber-accent text-barber-primary px-4 py-2 rounded-lg font-semibold hover:bg-yellow-500 transition-colors">
+                        Entrar
+                    </a>
+                </div>
+                
+                <!-- Menú móvil -->
+                <button class="md:hidden" id="mobile-menu-button">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Menú móvil oculto -->
+            <div class="hidden md:hidden pb-4" id="mobile-menu">
+                <div class="flex flex-col space-y-2">
+                    <a href="index.html" class="hover:text-barber-accent transition-colors py-2">Inicio</a>
+                    <a href="servicios.html" class="hover:text-barber-accent transition-colors py-2">Servicios</a>
+                    <a href="reservar.html" class="hover:text-barber-accent transition-colors py-2">Reservar</a>
+                    <a href="galeria.html" class="hover:text-barber-accent transition-colors py-2">Galería</a>
+                    <a href="contacto.html" class="hover:text-barber-accent transition-colors py-2">Contacto</a>
+                    <a href="perfil.html" class="hover:text-barber-accent transition-colors py-2">Mi Perfil</a>
+                    <a href="login.html" class="bg-barber-accent text-barber-primary px-4 py-2 rounded-lg font-semibold hover:bg-yellow-500 transition-colors text-center">
+                        Entrar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-64 flex items-center justify-center bg-gradient-to-br from-barber-primary to-gray-900">
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        <div class="relative z-10 text-center text-white px-4">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                Nuestros <span class="text-barber-accent">Servicios</span>
+            </h1>
+            <p class="text-xl text-gray-200">
+                Estilo profesional para cada necesidad
+            </p>
+        </div>
+    </section>
+
+    <!-- Contenido Principal -->
+    <main class="container mx-auto px-4 py-12">
+        
+        <!-- Servicios Principales -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-12 text-barber-primary">
+                Servicios de Barbería
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Corte de Pelo -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="h-48 bg-barber-secondary flex items-center justify-center">
+                        <svg class="w-24 h-24 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l-5.5 9h11z"/>
+                            <circle cx="12" cy="17.5" r="4.5"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-barber-primary">Corte de Pelo</h3>
+                        <p class="text-gray-600 mb-4">Corte profesional con estilo moderno adaptado a tu tipo de cabello y forma de cara.</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-2xl font-bold text-barber-accent">€15</span>
+                            <span class="text-sm text-gray-500">30 minutos</span>
+                        </div>
+                        <button onclick="reservarServicio('Corte de Pelo', 15)" class="w-full bg-barber-primary text-white py-2 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
+                            Reservar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Afeitado Clásico -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="h-48 bg-barber-secondary flex items-center justify-center">
+                        <svg class="w-24 h-24 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14H8v-2h4v2zm6 0h-2v-2h2v2zm0-4H8V9h10v4z"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-barber-primary">Afeitado Clásico</h3>
+                        <p class="text-gray-600 mb-4">Afeitado tradicional con navaja caliente, toallas calientes y productos de alta calidad.</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-2xl font-bold text-barber-accent">€12</span>
+                            <span class="text-sm text-gray-500">20 minutos</span>
+                        </div>
+                        <button onclick="reservarServicio('Afeitado Clásico', 12)" class="w-full bg-barber-primary text-white py-2 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
+                            Reservar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Arreglo de Barba -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="h-48 bg-barber-secondary flex items-center justify-center">
+                        <svg class="w-24 h-24 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17 4c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zM7 4c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm10 13c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm-10 0c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-barber-primary">Arreglo de Barba</h3>
+                        <p class="text-gray-600 mb-4">Diseño y mantenimiento profesional de barba con recorte y perfilado preciso.</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-2xl font-bold text-barber-accent">€10</span>
+                            <span class="text-sm text-gray-500">15 minutos</span>
+                        </div>
+                        <button onclick="reservarServicio('Arreglo de Barba', 10)" class="w-full bg-barber-primary text-white py-2 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
+                            Reservar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Paquete Completo -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="h-48 bg-barber-accent flex items-center justify-center">
+                        <svg class="w-24 h-24 text-barber-primary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-barber-primary">Paquete Completo</h3>
+                        <p class="text-gray-600 mb-4">Corte + Afeitado + Arreglo de barba. La experiencia completa de barbería.</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-2xl font-bold text-barber-accent">€30</span>
+                            <span class="text-sm text-gray-500">60 minutos</span>
+                        </div>
+                        <button onclick="reservarServicio('Paquete Completo', 30)" class="w-full bg-barber-accent text-barber-primary py-2 rounded-lg font-semibold hover:bg-yellow-500 transition-colors">
+                            Reservar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Corte Infantil -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="h-48 bg-barber-secondary flex items-center justify-center">
+                        <svg class="w-24 h-24 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-barber-primary">Corte Infantil</h3>
+                        <p class="text-gray-600 mb-4">Corte especial para niños con paciencia y cuidado, hasta 12 años.</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-2xl font-bold text-barber-accent">€12</span>
+                            <span class="text-sm text-gray-500">25 minutos</span>
+                        </div>
+                        <button onclick="reservarServicio('Corte Infantil', 12)" class="w-full bg-barber-primary text-white py-2 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
+                            Reservar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tratamiento Capilar -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="h-48 bg-barber-secondary flex items-center justify-center">
+                        <svg class="w-24 h-24 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.5 12A5.5 5.5 0 0 1 12 6.5C5.5 6.5 5 12 5 12s1.5 6.5 7 6.5 5.5-6.5 5.5-6.5zm-6 4c-1.38 0-2.5-1.12-2.5-2.5S10.12 11 11.5 11s2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-barber-primary">Tratamiento Capilar</h3>
+                        <p class="text-gray-600 mb-4">Tratamiento profundo para cabello dañado con productos profesionales.</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-2xl font-bold text-barber-accent">€20</span>
+                            <span class="text-sm text-gray-500">45 minutos</span>
+                        </div>
+                        <button onclick="reservarServicio('Tratamiento Capilar', 20)" class="w-full bg-barber-primary text-white py-2 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
+                            Reservar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Servicios Adicionales -->
+        <section>
+            <h2 class="text-3xl font-bold text-center mb-12 text-barber-primary">
+                Servicios Adicionales
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white rounded-lg shadow p-6 text-center hover:shadow-lg transition-shadow">
+                    <h4 class="font-semibold mb-2">Lavado y Secado</h4>
+                    <p class="text-gray-600 mb-3">Lavado profesional con secado</p>
+                    <p class="text-xl font-bold text-barber-accent">€8</p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow p-6 text-center hover:shadow-lg transition-shadow">
+                    <h4 class="font-semibold mb-2">Tinte de Barba</h4>
+                    <p class="text-gray-600 mb-3">Coloración profesional para barba</p>
+                    <p class="text-xl font-bold text-barber-accent">€15</p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow p-6 text-center hover:shadow-lg transition-shadow">
+                    <h4 class="font-semibold mb-2">Mascarilla Facial</h4>
+                    <p class="text-gray-600 mb-3">Tratamiento facial relajante</p>
+                    <p class="text-xl font-bold text-barber-accent">€10</p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow p-6 text-center hover:shadow-lg transition-shadow">
+                    <h4 class="font-semibold mb-2">Masaje Cabeza</h4>
+                    <p class="text-gray-600 mb-3">Masaje relajante de 10 min</p>
+                    <p class="text-xl font-bold text-barber-accent">€5</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-barber-primary text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <svg class="w-8 h-8 text-barber-accent" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                        </svg>
+                        <span class="text-xl font-bold">Barber Studio</span>
+                    </div>
+                    <p class="text-gray-400">Estilo profesional para hombres</p>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold mb-4">Enlaces</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="servicios.html" class="hover:text-barber-accent transition-colors">Servicios</a></li>
+                        <li><a href="reservar.html" class="hover:text-barber-accent transition-colors">Reservar</a></li>
+                        <li><a href="galeria.html" class="hover:text-barber-accent transition-colors">Galería</a></li>
+                        <li><a href="contacto.html" class="hover:text-barber-accent transition-colors">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold mb-4">Usuario</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="login.html" class="hover:text-barber-accent transition-colors">Iniciar Sesión</a></li>
+                        <li><a href="registro.html" class="hover:text-barber-accent transition-colors">Registrarse</a></li>
+                        <li><a href="perfil.html" class="hover:text-barber-accent transition-colors">Mi Perfil</a></li>
+                        <li><a href="admin/login.html" class="hover:text-barber-accent transition-colors">Panel Admin</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold mb-4">Contacto</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>Calle Principal 123, Madrid</li>
+                        <li>+34 600 123 456</li>
+                        <li>info@barberstudio.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Barber Studio. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Menú móvil
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Reservar servicio
+        function reservarServicio(servicio, precio) {
+            // Guardar en localStorage para pre-llenar el formulario
+            localStorage.setItem('servicioSeleccionado', servicio);
+            localStorage.setItem('precioServicio', precio);
+            
+            // Redirigir a la página de reservas
+            window.location.href = 'reservar.html';
+        }
+    </script>
+</body>
+</html>

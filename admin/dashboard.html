@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Barber Studio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Configuración de Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'montserrat': ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        'barber-primary': '#1a1a1a',
+                        'barber-secondary': '#8b7355',
+                        'barber-accent': '#d4af37',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-montserrat bg-gray-50">
+    
+    <!-- Verificación de sesión -->
+    <script>
+        if (!localStorage.getItem('adminToken')) {
+            window.location.href = 'login.html';
+        }
+    </script>
+    
+    <!-- Header Admin -->
+    <header class="bg-barber-primary text-white shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-4">
+                    <svg class="w-8 h-8 text-barber-accent" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+                    </svg>
+                    <div>
+                        <h1 class="text-xl font-bold">Panel de Administración</h1>
+                        <p class="text-sm text-gray-400">Barber Studio</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm">Admin: <span id="adminEmail">admin@barberstudio.com</span></span>
+                    <button onclick="logout()" class="bg-red-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+                        Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white shadow-lg min-h-screen">
+            <nav class="p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#dashboard" class="flex items-center space-x-3 p-3 rounded-lg bg-barber-accent text-barber-primary font-medium">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+                            </svg>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#citas" onclick="showSection('citas')" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 text-gray-700">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                            </svg>
+                            <span>Gestionar Citas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#servicios" onclick="showSection('servicios')" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 text-gray-700">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2l-5.5 9h11z"/>
+                                <circle cx="12" cy="17.5" r="4.5"/>
+                            </svg>
+                            <span>Servicios</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#precios" onclick="showSection('precios')" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 text-gray-700">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
+                            </svg>
+                            <span>Precios</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#clientes" onclick="showSection('clientes')" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 text-gray-700">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                            </svg>
+                            <span>Clientes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#barberos" onclick="showSection('barberos')" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 text-gray-700">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                            <span>Barberos</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-8">
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="space-y-6">
+                <h2 class="text-2xl font-bold text-barber-primary">Dashboard</h2>
+                
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-600">Citas Hoy</p>
+                                <p class="text-2xl font-bold text-barber-primary">12</p>
+                            </div>
+                            <div class="bg-blue-100 p-3 rounded-full">
+                                <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-600">Ingresos Mes</p>
+                                <p class="text-2xl font-bold text-green-600">€2,450</p>
+                            </div>
+                            <div class="bg-green-100 p-3 rounded-full">
+                                <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-600">Clientes Totales</p>
+                                <p class="text-2xl font-bold text-barber-primary">156</p>
+                            </div>
+                            <div class="bg-purple-100 p-3 rounded-full">
+                                <svg class="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-600">Servicios Activos</p>
+                                <p class="text-2xl font-bold text-barber-accent">8</p>
+                            </div>
+                            <div class="bg-yellow-100 p-3 rounded-full">
+                                <svg class="w-6 h-6 text-yellow-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2l-5.5 9h11z"/>
+                                    <circle cx="12" cy="17.5" r="4.5"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Citas de Hoy -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold mb-4 text-barber-primary">Citas de Hoy</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hora</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cliente</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Servicio</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Barbero</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">09:00</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Juan Pérez</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Corte de Pelo</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Carlos Rodríguez</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                            Confirmada
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-indigo-600 hover:text-indigo-900 mr-3">Editar</button>
+                                        <button class="text-red-600 hover:text-red-900">Cancelar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">10:00</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">María García</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Arreglo de Barba</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Miguel Ángel</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                            Pendiente
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-indigo-600 hover:text-indigo-900 mr-3">Editar</button>
+                                        <button class="text-red-600 hover:text-red-900">Cancelar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Other Sections (hidden by default) -->
+            <section id="citas-section" class="space-y-6 hidden">
+                <h2 class="text-2xl font-bold text-barber-primary">Gestionar Citas</h2>
+                <div class="bg-white rounded-lg shadow p-6">
+                    <p class="text-gray-600">Aquí podrás gestionar todas las citas del sistema...</p>
+                </div>
+            </section>
+
+            <section id="servicios-section" class="space-y-6 hidden">
+                <h2 class="text-2xl font-bold text-barber-primary">Servicios</h2>
+                <div class="bg-white rounded-lg shadow p-6">
+                    <p class="text-gray-600">Gestión de servicios ofrecidos...</p>
+                </div>
+            </section>
+
+            <section id="precios-section" class="space-y-6 hidden">
+                <h2 class="text-2xl font-bold text-barber-primary">Precios</h2>
+                <div class="bg-white rounded-lg shadow p-6">
+                    <p class="text-gray-600">Gestión de precios de servicios...</p>
+                </div>
+            </section>
+
+            <section id="clientes-section" class="space-y-6 hidden">
+                <h2 class="text-2xl font-bold text-barber-primary">Clientes</h2>
+                <div class="bg-white rounded-lg shadow p-6">
+                    <p class="text-gray-600">Gestión de clientes...</p>
+                </div>
+            </section>
+
+            <section id="barberos-section" class="space-y-6 hidden">
+                <h2 class="text-2xl font-bold text-barber-primary">Barberos</h2>
+                <div class="bg-white rounded-lg shadow p-6">
+                    <p class="text-gray-600">Gestión de barberos y personal...</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Mostrar email del admin
+        document.getElementById('adminEmail').textContent = localStorage.getItem('adminEmail') || 'admin@barberstudio.com';
+        
+        function logout() {
+            if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+                localStorage.removeItem('adminToken');
+                localStorage.removeItem('adminEmail');
+                window.location.href = 'login.html';
+            }
+        }
+        
+        function showSection(section) {
+            // Ocultar todas las secciones
+            const sections = ['dashboard', 'citas', 'servicios', 'precios', 'clientes', 'barberos'];
+            sections.forEach(s => {
+                const element = document.getElementById(s + '-section');
+                if (element) element.classList.add('hidden');
+            });
+            
+            // Mostrar la sección seleccionada
+            const targetSection = document.getElementById(section + '-section');
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+            }
+            
+            // Actualizar navegación
+            const navLinks = document.querySelectorAll('aside nav a');
+            navLinks.forEach(link => {
+                link.classList.remove('bg-barber-accent', 'text-barber-primary', 'font-medium');
+                link.classList.add('text-gray-700');
+            });
+            
+            // Resaltar enlace activo
+            const activeLink = document.querySelector(`a[href="#${section}"]`);
+            if (activeLink) {
+                activeLink.classList.add('bg-barber-accent', 'text-barber-primary', 'font-medium');
+                activeLink.classList.remove('text-gray-700');
+            }
+        }
+        
+        // Cargar datos del dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Cargando datos del dashboard...');
+            // Aquí se cargarían los datos reales desde Supabase
+        });
+    </script>
+</body>
+</html>

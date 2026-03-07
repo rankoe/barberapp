@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - Barber App</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Configuración de Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'montserrat': ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        'barber-primary': '#1a1a1a',
+                        'barber-secondary': '#8b7355',
+                        'barber-accent': '#d4af37',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-montserrat bg-gray-50">
+    
+    <!-- Navegación -->
+    <nav class="bg-barber-primary text-white shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <svg class="w-8 h-8 text-barber-accent" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                    </svg>
+                    <a href="index.html" class="text-xl font-bold">Barber Studio</a>
+                </div>
+                
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="hover:text-barber-accent transition-colors">Inicio</a>
+                    <a href="servicios.html" class="hover:text-barber-accent transition-colors">Servicios</a>
+                    <a href="reservar.html" class="hover:text-barber-accent transition-colors">Reservar</a>
+                    <a href="galeria.html" class="hover:text-barber-accent transition-colors">Galería</a>
+                    <a href="contacto.html" class="hover:text-barber-accent transition-colors">Contacto</a>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="perfil.html" class="hover:text-barber-accent transition-colors flex items-center space-x-2 text-barber-accent">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                        <span>Mi Perfil</span>
+                    </a>
+                    <button onclick="logout()" class="bg-red-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+                        Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Información del Usuario -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="text-center">
+                        <div class="mx-auto h-24 w-24 bg-barber-secondary rounded-full flex items-center justify-center mb-4">
+                            <svg class="h-16 w-16 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                        </div>
+                        <h2 class="text-2xl font-bold text-barber-primary mb-2">Juan Pérez</h2>
+                        <p class="text-gray-600 mb-4">+34 600 123 456</p>
+                        
+                        <div class="space-y-2 text-left">
+                            <div class="flex justify-between py-2 border-b">
+                                <span class="text-gray-600">Email:</span>
+                                <span class="font-medium">juan.perez@email.com</span>
+                            </div>
+                            <div class="flex justify-between py-2 border-b">
+                                <span class="text-gray-600">Miembro desde:</span>
+                                <span class="font-medium">Enero 2024</span>
+                            </div>
+                            <div class="flex justify-between py-2 border-b">
+                                <span class="text-gray-600">Total de citas:</span>
+                                <span class="font-medium">12</span>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full mt-4 bg-barber-accent text-barber-primary py-2 rounded-lg font-semibold hover:bg-yellow-500 transition-colors">
+                            Editar Perfil
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mis Citas -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl font-bold text-barber-primary">Mis Citas</h3>
+                        <a href="reservar.html" class="bg-barber-accent text-barber-primary px-4 py-2 rounded-lg font-semibold hover:bg-yellow-500 transition-colors">
+                            Nueva Cita
+                        </a>
+                    </div>
+                    
+                    <!-- Tabs -->
+                    <div class="border-b border-gray-200 mb-6">
+                        <nav class="-mb-px flex space-x-8">
+                            <button class="py-2 px-1 border-b-2 border-barber-accent text-barber-accent font-medium text-sm" onclick="showTab('proximas')">
+                                Próximas Citas
+                            </button>
+                            <button class="py-2 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 font-medium text-sm" onclick="showTab('historial')">
+                                Historial
+                            </button>
+                        </nav>
+                    </div>
+                    
+                    <!-- Próximas Citas -->
+                    <div id="proximas-citas" class="space-y-4">
+                        <div class="border rounded-lg p-4 hover:shadow-md transition-shadow">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-semibold text-lg text-barber-primary">Corte de Pelo</h4>
+                                    <p class="text-gray-600">Barber: Carlos Rodríguez</p>
+                                    <div class="flex items-center space-x-4 mt-2 text-sm text-gray-500">
+                                        <span class="flex items-center">
+                                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                                            </svg>
+                                            15 Marzo 2024
+                                        </span>
+                                        <span class="flex items-center">
+                                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                                            </svg>
+                                            10:00 AM
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-2xl font-bold text-barber-accent">€15</p>
+                                    <div class="space-x-2 mt-2">
+                                        <button class="bg-green-600 text-white px-3 py-1 rounded text-sm hover:bg-green-700">
+                                            Confirmar
+                                        </button>
+                                        <button class="bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700">
+                                            Cancelar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="border rounded-lg p-4 hover:shadow-md transition-shadow">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-semibold text-lg text-barber-primary">Arreglo de Barba</h4>
+                                    <p class="text-gray-600">Barber: Miguel Ángel</p>
+                                    <div class="flex items-center space-x-4 mt-2 text-sm text-gray-500">
+                                        <span class="flex items-center">
+                                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                                            </svg>
+                                            22 Marzo 2024
+                                        </span>
+                                        <span class="flex items-center">
+                                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                                            </svg>
+                                            4:00 PM
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-2xl font-bold text-barber-accent">€10</p>
+                                    <div class="space-x-2 mt-2">
+                                        <button class="bg-green-600 text-white px-3 py-1 rounded text-sm hover:bg-green-700">
+                                            Confirmar
+                                        </button>
+                                        <button class="bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700">
+                                            Cancelar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Historial (oculto por defecto) -->
+                    <div id="historial-citas" class="space-y-4 hidden">
+                        <div class="border rounded-lg p-4 opacity-75">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-semibold text-lg text-barber-primary">Corte + Barba</h4>
+                                    <p class="text-gray-600">Barber: Carlos Rodríguez</p>
+                                    <div class="flex items-center space-x-4 mt-2 text-sm text-gray-500">
+                                        <span class="flex items-center">
+                                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                                            </svg>
+                                            1 Marzo 2024
+                                        </span>
+                                        <span class="flex items-center">
+                                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                                            </svg>
+                                            11:00 AM
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-2xl font-bold text-gray-600">€25</p>
+                                    <span class="inline-block bg-green-100 text-green-800 px-2 py-1 rounded text-sm font-medium">
+                                        Completada
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="border rounded-lg p-4 opacity-75">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-semibold text-lg text-barber-primary">Afeitado Clásico</h4>
+                                    <p class="text-gray-600">Barber: Miguel Ángel</p>
+                                    <div class="flex items-center space-x-4 mt-2 text-sm text-gray-500">
+                                        <span class="flex items-center">
+                                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                                            </svg>
+                                            15 Febrero 2024
+                                        </span>
+                                        <span class="flex items-center">
+                                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                                            </svg>
+                                            3:00 PM
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-2xl font-bold text-gray-600">€12</p>
+                                    <span class="inline-block bg-green-100 text-green-800 px-2 py-1 rounded text-sm font-medium">
+                                        Completada
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-barber-primary text-white py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 Barber Studio. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        function showTab(tab) {
+            const proximasCitas = document.getElementById('proximas-citas');
+            const historialCitas = document.getElementById('historial-citas');
+            const buttons = document.querySelectorAll('nav button');
+            
+            if (tab === 'proximas') {
+                proximasCitas.classList.remove('hidden');
+                historialCitas.classList.add('hidden');
+                buttons[0].classList.add('border-barber-accent', 'text-barber-accent');
+                buttons[0].classList.remove('border-transparent', 'text-gray-500');
+                buttons[1].classList.remove('border-barber-accent', 'text-barber-accent');
+                buttons[1].classList.add('border-transparent', 'text-gray-500');
+            } else {
+                proximasCitas.classList.add('hidden');
+                historialCitas.classList.remove('hidden');
+                buttons[1].classList.add('border-barber-accent', 'text-barber-accent');
+                buttons[1].classList.remove('border-transparent', 'text-gray-500');
+                buttons[0].classList.remove('border-barber-accent', 'text-barber-accent');
+                buttons[0].classList.add('border-transparent', 'text-gray-500');
+            }
+        }
+        
+        function logout() {
+            if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+                window.location.href = 'login.html';
+            }
+        }
+        
+        // Simulación de carga de datos del usuario
+        document.addEventListener('DOMContentLoaded', function() {
+            // Aquí se cargarían los datos reales del usuario desde Supabase
+            console.log('Cargando datos del usuario...');
+        });
+    </script>
+</body>
+</html>

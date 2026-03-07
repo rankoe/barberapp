@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservar Cita - Barber Studio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Configuración de Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'montserrat': ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        'barber-primary': '#1a1a1a',
+                        'barber-secondary': '#8b7355',
+                        'barber-accent': '#d4af37',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-montserrat bg-gray-50">
+    
+    <!-- Navegación -->
+    <nav class="bg-barber-primary text-white shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <svg class="w-8 h-8 text-barber-accent" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                    </svg>
+                    <a href="index.html" class="text-xl font-bold">Barber Studio</a>
+                </div>
+                
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="hover:text-barber-accent transition-colors">Inicio</a>
+                    <a href="servicios.html" class="hover:text-barber-accent transition-colors">Servicios</a>
+                    <a href="reservar.html" class="hover:text-barber-accent transition-colors">Reservar</a>
+                    <a href="galeria.html" class="hover:text-barber-accent transition-colors">Galería</a>
+                    <a href="contacto.html" class="hover:text-barber-accent transition-colors">Contacto</a>
+                </div>
+                
+                <a href="index.html" class="bg-barber-accent text-barber-primary px-4 py-2 rounded-lg font-semibold hover:bg-yellow-500 transition-colors">
+                    Volver
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-3xl md:text-4xl font-bold text-center mb-8 text-barber-primary">
+                Reservar tu Cita
+            </h1>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Formulario de Reserva -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h2 class="text-xl font-semibold mb-6 text-barber-primary">Detalles de la Reserva</h2>
+                    
+                    <form id="reservaForm" class="space-y-4">
+                        <!-- Información Personal -->
+                        <div class="border-b pb-4">
+                            <h3 class="font-medium mb-3">Información Personal</h3>
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo *</label>
+                                    <input type="text" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-barber-accent" placeholder="Tu nombre completo">
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Teléfono *</label>
+                                    <input type="tel" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-barber-accent" placeholder="+34 600 123 456">
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                    <input type="email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-barber-accent" placeholder="tu@email.com">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Selección de Servicio -->
+                        <div class="border-b pb-4">
+                            <h3 class="font-medium mb-3">Seleccionar Servicio</h3>
+                            <div class="space-y-2">
+                                <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                    <input type="radio" name="servicio" value="corte" class="mr-3" checked>
+                                    <div class="flex-1">
+                                        <div class="font-medium">Corte de Pelo</div>
+                                        <div class="text-sm text-gray-600">30 minutos</div>
+                                    </div>
+                                    <span class="font-bold text-barber-accent">€15</span>
+                                </label>
+                                
+                                <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                    <input type="radio" name="servicio" value="afeitado" class="mr-3">
+                                    <div class="flex-1">
+                                        <div class="font-medium">Afeitado Clásico</div>
+                                        <div class="text-sm text-gray-600">20 minutos</div>
+                                    </div>
+                                    <span class="font-bold text-barber-accent">€12</span>
+                                </label>
+                                
+                                <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                    <input type="radio" name="servicio" value="barba" class="mr-3">
+                                    <div class="flex-1">
+                                        <div class="font-medium">Arreglo de Barba</div>
+                                        <div class="text-sm text-gray-600">15 minutos</div>
+                                    </div>
+                                    <span class="font-bold text-barber-accent">€10</span>
+                                </label>
+                                
+                                <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                    <input type="radio" name="servicio" value="completo" class="mr-3">
+                                    <div class="flex-1">
+                                        <div class="font-medium">Paquete Completo</div>
+                                        <div class="text-sm text-gray-600">60 minutos</div>
+                                    </div>
+                                    <span class="font-bold text-barber-accent">€30</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Fecha y Hora -->
+                        <div class="border-b pb-4">
+                            <h3 class="font-medium mb-3">Fecha y Hora</h3>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Fecha *</label>
+                                    <input type="date" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-barber-accent">
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Hora *</label>
+                                    <select required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-barber-accent">
+                                        <option value="">Seleccionar hora</option>
+                                        <option value="09:00">09:00 AM</option>
+                                        <option value="09:30">09:30 AM</option>
+                                        <option value="10:00">10:00 AM</option>
+                                        <option value="10:30">10:30 AM</option>
+                                        <option value="11:00">11:00 AM</option>
+                                        <option value="11:30">11:30 AM</option>
+                                        <option value="12:00">12:00 PM</option>
+                                        <option value="12:30">12:30 PM</option>
+                                        <option value="16:00">04:00 PM</option>
+                                        <option value="16:30">04:30 PM</option>
+                                        <option value="17:00">05:00 PM</option>
+                                        <option value="17:30">05:30 PM</option>
+                                        <option value="18:00">06:00 PM</option>
+                                        <option value="18:30">06:30 PM</option>
+                                        <option value="19:00">07:00 PM</option>
+                                        <option value="19:30">07:30 PM</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Preferencias -->
+                        <div>
+                            <h3 class="font-medium mb-3">Preferencias</h3>
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Barbero Preferido (opcional)</label>
+                                    <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-barber-accent">
+                                        <option value="">Sin preferencia</option>
+                                        <option value="carlos">Carlos Rodríguez</option>
+                                        <option value="miguel">Miguel Ángel</option>
+                                        <option value="david">David López</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Notas Adicionales</label>
+                                    <textarea rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-barber-accent" placeholder="Alguna instrucción especial para tu corte..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-barber-accent text-barber-primary py-3 rounded-lg font-semibold hover:bg-yellow-500 transition-colors">
+                            Reservar Cita
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Resumen y Política -->
+                <div class="space-y-6">
+                    <!-- Resumen de la Reserva -->
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h2 class="text-xl font-semibold mb-4 text-barber-primary">Resumen de la Reserva</h2>
+                        <div id="resumen" class="space-y-3">
+                            <div class="flex justify-between py-2 border-b">
+                                <span class="text-gray-600">Servicio:</span>
+                                <span class="font-medium" id="resumen-servicio">Corte de Pelo</span>
+                            </div>
+                            <div class="flex justify-between py-2 border-b">
+                                <span class="text-gray-600">Duración:</span>
+                                <span class="font-medium" id="resumen-duracion">30 minutos</span>
+                            </div>
+                            <div class="flex justify-between py-2 border-b">
+                                <span class="text-gray-600">Precio:</span>
+                                <span class="font-bold text-barber-accent text-lg" id="resumen-precio">€15</span>
+                            </div>
+                            <div class="flex justify-between py-2 border-b">
+                                <span class="text-gray-600">Fecha:</span>
+                                <span class="font-medium" id="resumen-fecha">Por seleccionar</span>
+                            </div>
+                            <div class="flex justify-between py-2 border-b">
+                                <span class="text-gray-600">Hora:</span>
+                                <span class="font-medium" id="resumen-hora">Por seleccionar</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Política de Cancelación -->
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                        <h3 class="font-semibold mb-3 text-blue-900">Política de Cancelación</h3>
+                        <ul class="space-y-2 text-sm text-blue-800">
+                            <li class="flex items-start">
+                                <svg class="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                </svg>
+                                Cancelación gratuita hasta 2 horas antes
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                </svg>
+                                Llegar 5 minutos antes de la cita
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                </svg>
+                            </svg>
+                                Confirmación por SMS/Email
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Contacto -->
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="font-semibold mb-3 text-barber-primary">¿Necesitas Ayuda?</h3>
+                        <p class="text-gray-600 mb-4">Si tienes alguna pregunta sobre tu reserva, contáctanos:</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center text-gray-600">
+                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                                </svg>
+                                +34 600 123 456
+                            </div>
+                            <div class="flex items-center text-gray-600">
+                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                </svg>
+                                info@barberstudio.com
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-barber-primary text-white py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 Barber Studio. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Actualizar resumen según la selección
+        const servicios = {
+            'corte': { nombre: 'Corte de Pelo', duracion: '30 minutos', precio: '€15' },
+            'afeitado': { nombre: 'Afeitado Clásico', duracion: '20 minutos', precio: '€12' },
+            'barba': { nombre: 'Arreglo de Barba', duracion: '15 minutos', precio: '€10' },
+            'completo': { nombre: 'Paquete Completo', duracion: '60 minutos', precio: '€30' }
+        };
+        
+        // Actualizar resumen cuando cambia el servicio
+        document.querySelectorAll('input[name="servicio"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const servicio = servicios[this.value];
+                document.getElementById('resumen-servicio').textContent = servicio.nombre;
+                document.getElementById('resumen-duracion').textContent = servicio.duracion;
+                document.getElementById('resumen-precio').textContent = servicio.precio;
+            });
+        });
+        
+        // Actualizar fecha y hora
+        document.querySelector('input[type="date"]').addEventListener('change', function() {
+            document.getElementById('resumen-fecha').textContent = this.value || 'Por seleccionar';
+        });
+        
+        document.querySelector('select').addEventListener('change', function() {
+            document.getElementById('resumen-hora').textContent = this.value || 'Por seleccionar';
+        });
+        
+        // Manejar envío del formulario
+        document.getElementById('reservaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Recopilar datos del formulario
+            const formData = new FormData(this);
+            const reserva = {
+                nombre: formData.get('nombre'),
+                telefono: formData.get('telefono'),
+                email: formData.get('email'),
+                servicio: formData.get('servicio'),
+                fecha: formData.get('fecha'),
+                hora: formData.get('hora')
+            };
+            
+            console.log('Reserva:', reserva);
+            
+            // Simulación de reserva (se conectará con Supabase después)
+            alert('¡Cita reservada con éxito! Recibirás una confirmación por SMS.');
+            
+            // Redirigir al perfil o página de confirmación
+            window.location.href = 'perfil.html';
+        });
+        
+        // Establecer fecha mínima (hoy)
+        const today = new Date().toISOString().split('T')[0];
+        document.querySelector('input[type="date"]').setAttribute('min', today);
+    </script>
+</body>
+</html>

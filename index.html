@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barber App - Citas de Peluquería</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Meta tags para PWA -->
+    <meta name="theme-color" content="#d4af37">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Barber Studio">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2Q0YWYzNyI+PHBhdGggZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEyczQuNDggMTAgMTAgMTAgMTAtNC40OCAxMC0xMFMxNy41MiAyIDEyIDJ6bTAgM2MxLjY2IDAgMyAxLjM0IDMgM3MtMS4zNCAzLTMgMy0zLTEuMzQtMy0zIDEuMzQtMyAzLTMgM3ptMCAxNC4yYy0yLjUgMC00LjcxLTEuMjgtNi0zLjIyLjAzLTEuOTkgNC0zLjA4IDYtMy4wOCAxLjk5IDAgNS45NyAxLjA5IDYgMy4wOC0xLjI5IDEuOTQtMy41IDMuMjItNiAzLjIyeiIvPjwvc3ZnPg==">
+    
+    <!-- Configuración de Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'montserrat': ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        'barber-primary': '#1a1a1a',
+                        'barber-secondary': '#8b7355',
+                        'barber-accent': '#d4af37',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-montserrat bg-gray-50">
+    
+    <!-- Navegación -->
+    <nav class="bg-barber-primary text-white shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <svg class="w-8 h-8 text-barber-accent" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                    </svg>
+                    <span class="text-xl font-bold">Barber Studio</span>
+                </div>
+                
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="hover:text-barber-accent transition-colors">Inicio</a>
+                    <a href="servicios.html" class="hover:text-barber-accent transition-colors">Servicios</a>
+                    <a href="reservar.html" class="hover:text-barber-accent transition-colors">Reservar</a>
+                    <a href="galeria.html" class="hover:text-barber-accent transition-colors">Galería</a>
+                    <a href="contacto.html" class="hover:text-barber-accent transition-colors">Contacto</a>
+                </div>
+                
+                <!-- Usuario y Login -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="perfil.html" class="hover:text-barber-accent transition-colors flex items-center space-x-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                        <span>Mi Perfil</span>
+                    </a>
+                    <a href="login.html" class="bg-barber-accent text-barber-primary px-4 py-2 rounded-lg font-semibold hover:bg-yellow-500 transition-colors">
+                        Entrar
+                    </a>
+                </div>
+                
+                <!-- Menú móvil -->
+                <button class="md:hidden" id="mobile-menu-button">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Menú móvil oculto -->
+            <div class="hidden md:hidden pb-4" id="mobile-menu">
+                <div class="flex flex-col space-y-2">
+                    <a href="#inicio" class="hover:text-barber-accent transition-colors py-2">Inicio</a>
+                    <a href="#servicios" class="hover:text-barber-accent transition-colors py-2">Servicios</a>
+                    <a href="#citas" class="hover:text-barber-accent transition-colors py-2">Citas</a>
+                    <a href="#galeria" class="hover:text-barber-accent transition-colors py-2">Galería</a>
+                    <a href="#contacto" class="hover:text-barber-accent transition-colors py-2">Contacto</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative h-screen flex items-center justify-center bg-gradient-to-br from-barber-primary to-gray-900">
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        
+        <div class="relative z-10 text-center text-white px-4">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                Estilo <span class="text-barber-accent">Profesional</span> para Hombres
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 text-gray-200">
+                Citas de peluquería rápidas y sencillas
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-barber-accent text-barber-primary px-8 py-3 rounded-lg font-semibold hover:bg-yellow-500 transition-colors">
+                    Reservar Cita
+                </button>
+                <button class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-barber-primary transition-colors">
+                    Ver Servicios
+                </button>
+            </div>
+        </div>
+        
+        <!-- Imagen de fondo (placeholder) -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+    </section>
+
+    <!-- Servicios -->
+    <section id="servicios" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-barber-primary">
+                Nuestros Servicios
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Corte de Pelo -->
+                <div class="text-center group">
+                    <div class="bg-barber-secondary w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-barber-accent transition-colors">
+                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l-5.5 9h11z"/>
+                            <circle cx="12" cy="17.5" r="4.5"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Corte de Pelo</h3>
+                    <p class="text-gray-600">Corte profesional con estilo moderno</p>
+                    <p class="text-2xl font-bold text-barber-accent mt-4">€15</p>
+                </div>
+                
+                <!-- Afeitado -->
+                <div class="text-center group">
+                    <div class="bg-barber-secondary w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-barber-accent transition-colors">
+                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14H8v-2h4v2zm6 0h-2v-2h2v2zm0-4H8V9h10v4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Afeitado Clásico</h3>
+                    <p class="text-gray-600">Afeitado tradicional con navaja</p>
+                    <p class="text-2xl font-bold text-barber-accent mt-4">€12</p>
+                </div>
+                
+                <!-- Barba -->
+                <div class="text-center group">
+                    <div class="bg-barber-secondary w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-barber-accent transition-colors">
+                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17 4c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zM7 4c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm10 13c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm-10 0c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Arreglo de Barba</h3>
+                    <p class="text-gray-600">Diseño y mantenimiento de barba</p>
+                    <p class="text-2xl font-bold text-barber-accent mt-4">€10</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Por qué elegirnos -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-barber-primary">
+                Por qué elegirnos
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="bg-barber-accent w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-barber-primary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Profesionalismo</h3>
+                    <p class="text-gray-600">Barberos con años de experiencia</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="bg-barber-accent w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-barber-primary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Puntualidad</h3>
+                    <p class="text-gray-600">Respetamos tu tiempo al máximo</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="bg-barber-accent w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-barber-primary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Calidad</h3>
+                    <p class="text-gray-600">Productos de primera calidad</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sistema de Citas -->
+    <section id="citas" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-barber-primary">
+                Reserva tu Cita
+            </h2>
+            
+            <div class="max-w-md mx-auto bg-white rounded-lg shadow-lg p-6">
+                <form class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nombre</label>
+                        <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-barber-accent" placeholder="Tu nombre">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Teléfono</label>
+                        <input type="tel" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-barber-accent" placeholder="Tu teléfono">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Servicio</label>
+                        <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-barber-accent">
+                            <option>Corte de Pelo - €15</option>
+                            <option>Afeitado Clásico - €12</option>
+                            <option>Arreglo de Barba - €10</option>
+                            <option>Paquete Completo - €30</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Fecha</label>
+                        <input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-barber-accent">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Hora</label>
+                        <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-barber-accent">
+                            <option>09:00</option>
+                            <option>10:00</option>
+                            <option>11:00</option>
+                            <option>12:00</option>
+                            <option>16:00</option>
+                            <option>17:00</option>
+                            <option>18:00</option>
+                            <option>19:00</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-barber-accent text-barber-primary py-3 rounded-md font-semibold hover:bg-yellow-500 transition-colors">
+                        Reservar Cita
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería -->
+    <section id="galeria" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-barber-primary">
+                Nuestro Trabajo
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Placeholder para imágenes -->
+                <div class="bg-gray-200 h-64 rounded-lg flex items-center justify-center">
+                    <span class="text-gray-500">Imagen 1</span>
+                </div>
+                <div class="bg-gray-200 h-64 rounded-lg flex items-center justify-center">
+                    <span class="text-gray-500">Imagen 2</span>
+                </div>
+                <div class="bg-gray-200 h-64 rounded-lg flex items-center justify-center">
+                    <span class="text-gray-500">Imagen 3</span>
+                </div>
+                <div class="bg-gray-200 h-64 rounded-lg flex items-center justify-center">
+                    <span class="text-gray-500">Imagen 4</span>
+                </div>
+                <div class="bg-gray-200 h-64 rounded-lg flex items-center justify-center">
+                    <span class="text-gray-500">Imagen 5</span>
+                </div>
+                <div class="bg-gray-200 h-64 rounded-lg flex items-center justify-center">
+                    <span class="text-gray-500">Imagen 6</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="py-20 bg-barber-primary text-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
+                Contacto
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Información</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 text-barber-accent" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                            <span>Calle Principal 123, Madrid</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 text-barber-accent" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                            </svg>
+                            <span>+34 600 123 456</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 text-barber-accent" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                            </svg>
+                            <span>info@barberstudio.com</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Horario</h3>
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <span>Lunes - Viernes</span>
+                            <span class="text-barber-accent">09:00 - 20:00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Sábado</span>
+                            <span class="text-barber-accent">09:00 - 14:00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Domingo</span>
+                            <span class="text-barber-accent">Cerrado</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2026 Barber Studio. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Menú móvil
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Smooth scroll para enlaces ancla (si los hay)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Registro del Service Worker para PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('ServiceWorker registrado con éxito:', registration.scope);
+                    })
+                    .catch(function(error) {
+                        console.log('Error al registrar el ServiceWorker:', error);
+                    });
+            });
+        }
+
+        // Solicitud de permiso para notificaciones
+        if ('Notification' in window && Notification.permission === 'default') {
+            Notification.requestPermission().then(function (permission) {
+                if (permission === 'granted') {
+                    console.log('Permiso de notificaciones concedido');
+                }
+            });
+        }
+
+        // Formulario de citas (placeholder)
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Función de reserva próximamente disponible con Supabase');
+        });
+    </script>
+</body>
+</html>
