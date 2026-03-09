@@ -1,0 +1,20 @@
+{
+  "name": "barber-studio-app",
+  "version": "1.0.0",
+  "description": "Sistema de citas para peluquería con PWA",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx http-server . -p 3000",
+    "dev": "npx http-server . -p 3000 -o",
+    "build": "echo 'Build completo - archivos estáticos listos'"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.38.4"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "keywords": ["pwa", "barber", "appointments", "supabase"],
+  "author": "Barber Studio",
+  "license": "MIT"
+}

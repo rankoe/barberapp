@@ -173,18 +173,21 @@
     </footer>
 
     <!-- JavaScript -->
+    <script src="auth.js"></script>
     <script>
-        document.querySelector('form').addEventListener('submit', function(e) {
+        document.getElementById('adminLoginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const telefono = document.getElementById('telefono').value;
             const password = document.getElementById('password').value;
             
-            // Simulación de login (se conectará con Supabase después)
-            console.log('Login intent:', { telefono, password });
+            // Usar la función de autenticación
+            const result = await window.BarberAuth.handleLogin(telefono, password);
             
-            // Redirección temporal al perfil
-            window.location.href = 'perfil.html';
+            if (!result.success) {
+                alert('Error en el inicio de sesión: ' + result.error);
+            }
+            // Si es exitoso, BarberAuth.handleLogin ya redirige
         });
     </script>
 </body>
